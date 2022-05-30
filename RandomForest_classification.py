@@ -1,4 +1,7 @@
+pip install pandas
 import pandas as pd
+from pandas import DataFrame
+import pandas.io.data
 
 data1 = pd.read_excel("D:\project\sampla_data_08_05_2022(final).xlsx")
 
@@ -7,7 +10,6 @@ data1.head()
 data1.info()
 
 data1= data1.drop(["Patient_ID"], axis=1)
-data1= data1.drop(["Patient_Age"], axis=1)
 data1= data1.drop(["Test_Booking_Date"], axis=1)
 data1= data1.drop(["Sample_Collection_Date"], axis=1)
 data1= data1.drop(["Mode_Of_Transport"], axis=1)
@@ -27,8 +29,6 @@ data1["Patient_Gender"] = le.fit_transform(data1["Patient_Gender"])
 data1.columns
 #or
 
-# n-1 dummy variables will be created for n categories
-data1 = pd.get_dummies(df, columns = ["Patient_Gender", "Test_Name", "Sample", "Way_Of_Storage_Of_Sample", "Test_Booking_Date", "Sample_Collection_Date", "Cut-off Schedule", "Traffic_Conditions", "Mode_Of_Transport", "Reached_On_Time"], drop_first = True)
 
 data1.head()
 
@@ -87,19 +87,6 @@ accuracy_score(y_test, cv_rf_clf_grid.predict(x_test))
 # Evaluation on Training Data
 confusion_matrix(y_train, cv_rf_clf_grid.predict(x_train))
 accuracy_score(y_train, cv_rf_clf_grid.predict(x_train))
-
-
-import pickle
-pickle.dump(rf_clf, open('Medical_sample.pickle', 'wb'))
-#load the model from disk
-model = pickle.load(open('Medical_sample.pickle', 'rb'))
-
-# checking for the results
-list_value = pd.DataFrame(data1.iloc[0:1,:14])
-list_value
-
-print(cv_rf_clf_grid.predict(list_value))
-
 
 import pickle
 filename = "rfd.pkl"

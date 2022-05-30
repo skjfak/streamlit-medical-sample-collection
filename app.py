@@ -6,7 +6,7 @@ import sklearn
 data = pickle.load(open('final.pkl', 'rb'))
 random_forest = pickle.load(open('rfd.pkl', 'rb'))
 
-st.title("Medical Sample Collection  Streamline")
+st.title("Medical Sample  Collection Streamline")
 
 #Age
 age = st.number_input('PATIENT AGE')
